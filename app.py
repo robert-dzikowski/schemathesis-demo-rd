@@ -203,5 +203,15 @@ def ui():
 </html>"""
 
 
+@app.errorhandler(500)
+def handle_500(error):
+    exception = error.original_exception
+    if exception:
+        error = str(exception)
+    else:
+        error = None
+    return jsonify({"success": False, "error": error}), 500
+
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=PORT)
