@@ -1,3 +1,4 @@
+import os
 import time
 
 from flask import Flask, jsonify, request, Response
@@ -175,7 +176,7 @@ def openapi():
     return Response(RAW_SCHEMA, content_type="application/json")
 
 
-PORT = 5000
+PORT = int(os.getenv("FLASK_RUN_PORT", 5123))
 
 
 @app.route("/ui/")
